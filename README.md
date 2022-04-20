@@ -42,3 +42,4 @@ Sample log in page for assignment / project
 ## Vulnerabilty 
 The vulnerable code exmaple can be seen in server.js 
 The code that is commetned out is the query parameterization which fixes the vulnerabilty 
+### Can run the vulnerable and non vulnerable by commenting out which one you want to run
