@@ -1,4 +1,4 @@
-
+// JavaScript form for the login and register form
 const name = document.querySelector('.name') || null;
 const email = document.querySelector('.email');
 const password = document.querySelector('.password');

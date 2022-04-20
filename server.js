@@ -7,9 +7,9 @@ const db = knex({
     client: 'pg',
     connection: {
         host: '127.0.0.1',
-        user: 'postgres',
-        password: 'Macaonasa123',
-        database: 'login_form_example'
+        user: '', // Enter own details for postgres
+        password: '', // Enter own details for postgres 
+        database: '' // Enter own details for postgres server my db was login_form_example. Table name was users
     }
 })
 
@@ -31,7 +31,7 @@ app.get('/login', (req, res) => {
 app.get('/register', (req, res) => {
     res.sendFile(path.join(intialPath, "register.html"));
 })
-
+// Register User
 app.post('/register-user', (req, res) => {
     const { name, email, password } = req.body;
 
@@ -54,25 +54,54 @@ app.post('/register-user', (req, res) => {
         })
     }
 })
+// For Logging in the user
+// ******************** VULNERABLE VERSION *********************************** 
+
 
 app.post('/login-user', (req, res) => {
     const { email, password } = req.body;
-
-    db.select('name', 'email')
-    .from('users')
-    .where({
-        email: email,
-        password: password
-    })
+    // Line Below is the vulnearble line ** This is a big vulnerability ** would not recommend this 
+    const query = `SELECT * FROM users WHERE email='${email}' AND password='${password}'`
+    console.log(query)
+    db.raw(query)
     .then(data => {
-        if(data.length){
-            console.log(data);
-            res.json(data[0]);
+        if(data.rows.length){
+            console.log(data.rows[0]);
+            res.json(data.rows[0]);
         } else{
             res.json('email or password is incorrect');
         }
     })
+    .catch(err => console.log(err))
 })
+
+
+// ****************************************************************
+
+// **************** With Query Parameterizatoin Not Vulnerable ****************************************
+
+
+// app.post('/login-user', (req, res) => {
+//     const { email, password } = req.body;
+
+//     db.select('name', 'email')
+//     .from('users')
+//     .where({
+//         email: email,
+//         password: password
+//     })
+//     .then(data => {
+//         if(data.length){
+//             console.log(data);
+//             res.json(data[0]);
+//         } else{
+//             res.json('email or password is incorrect');
+//         }
+//     })
+// })
+
+
+// *************************************************************************
 
 app.listen(3000, (req, res) => {
     console.log('listening on port 3000......')
