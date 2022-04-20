@@ -62,7 +62,7 @@ app.post('/login-user', (req, res) => {
     const { email, password } = req.body;
     // Line Below is the vulnearble line ** This is a big vulnerability ** would not recommend this 
     const query = `SELECT * FROM users WHERE email='${email}' AND password='${password}'`
-    console.log(query)
+    console.log(query) // Logs the SQL query that is running in the server logs 
     db.raw(query)
     .then(data => {
         if(data.rows.length){
