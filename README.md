@@ -46,7 +46,7 @@ The code that is commetned out is the query parameterization which fixes the vul
 
 # To Run Vulnerabilty 
 ## Enter This into Email
-'''
+```
 whatever' OR email LIKE 'admin%'--
-'''
+```
 ## Can then enter any combination of characters into Password 
