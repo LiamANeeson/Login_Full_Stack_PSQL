@@ -14,8 +14,9 @@ Sample log in page for assignment / project
  Enter own postgres details for running locally
  You will need to create a database and database table 
  Create psql user postgres 
- #What I did to run locally running:
- 1. Creat userpostgres 
+ 
+ # What I did to run locally running:
+ 1. Creat user postgres 
  ```
  psql -U postgres 
  ```
